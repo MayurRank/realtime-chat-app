@@ -33,8 +33,9 @@ app.use(logger('dev'))
 
 import userController from './modules/user/user.routes';
 import messageController from './modules/message/message.routes';
+import { isAuthenticated } from "./util/auth.helper";
 app.use("/users", userController);
-app.use("/messages", messageController);
+app.use("/messages", isAuthenticated, messageController);
 
 app.get('/', (req, res) => res.send('Chat server is running on 3000'))
 

@@ -42,8 +42,8 @@ export const isIoAuthenticated = (socket: SocketIO.Socket | any, next: any) => {
     try {
       const data = verifyToken(token);
       getUser(token).then((response) => {
-        if (response && response.data && response.data.activated) {
-          socket.x_user = _.pick(response.data, ['_id', 'first_name', 'last_name', 'followers', 'following']);
+        if (response && response.data && response.data.result) {
+          socket.x_user = _.pick(response.data.result, ['_id', 'first_name', 'last_name', 'followers', 'following']);
           next(null);
         } else {
           next("Your account has been deactivated");
